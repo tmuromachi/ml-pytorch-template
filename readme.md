@@ -24,6 +24,7 @@ vscodeではRemote SSHだとGit追跡が遅かったり、変更箇所がハイ�
 - WindowsでWSL2+VScode+venv+RemoteWSL環境を構築します。
 - シェルスクリプトでGPUの選択等を対話形式で行い、プログラムを実行します。
 - 実行時の時間やコメントを反映したディレクトリを作成し、ログの保存・実験管理を行います。 
+- 対象読者としてはLinuxコマンドが少しわかっている程度の人(情報系の学部1~2年生あたり)を想定しています。
 
 ---
 ## データ
@@ -47,6 +48,20 @@ https://docs.microsoft.com/ja-jp/windows/wsl/install
 2. **WSL2とvscodeを連携させる**  
 Linux 用 Windows サブシステムで Visual Studio Code の使用を開始する  
 https://docs.microsoft.com/ja-jp/windows/wsl/tutorials/wsl-vscode
+
+---
+## サンプルをGitからCloneする 
+サンプルを手元のPC(WSL2の中)にダウンロードしたいので、Gitからcloneします。  
+カレントディレクトリにダウンロードされるため、格納先のディレクトリを作成して移動しておいてください。
+自分は~/vscodeというディレクトリを作っています。
+```
+# 新しくディレクトリを作る場合
+$ cd
+$ mkdir vscode 
+# gitからプロジェクトをcloneする
+$ git clone git@github.com:tmuromachi/ml-pytorch-template.git
+```
+
 
 ---
 
@@ -120,7 +135,7 @@ PyTorchサンプル実行します。
 実行が終了すると実行結果は./log/[実行時刻]ディレクトリ内に保存されます。
 
 ###  注意事項等
-- ./template/main.pyがPyTorchサンプルコード全体となっています。   
+- `./template/main.py`がPyTorchサンプルコード全体となっています。   
 モジュール化しておらず、シェルスクリプトも不要なため、こちらの方がわかりやすいです。
 Pythonでは自作モジュールをインポートする際にはパスの設定が難しいため注意してください。
 
@@ -137,8 +152,7 @@ Pythonでは自作モジュールをインポートする際にはパスの設�
 少し分かりづらいので、最初は./template/main.pyを使ったほうがいいと思います。 
 
 
-- 今回やった実験管理は簡単なものですが、Tensorboard等を使っている人をよく見かけます。卒論でMLflow等まで手を出す必要はないと思いますが、
-色々とやり方はあると思うので好きな方法を探してください。
+- 今回やった実験管理は簡単なもの(ただし普通ではない)ですが、Tensorboard等を使っている人をよく見かけます。MLflowなど他にも色々とやり方はあると思うので好きな方法を探してください。
 
 ---
 ## 参考文献
