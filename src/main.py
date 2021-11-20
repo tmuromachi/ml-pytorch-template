@@ -20,7 +20,10 @@ if __name__ == '__main__':
     # リソースの選択（CPU/GPU）
     args = sys.argv
     cuda_number = "cuda:" + args[1]
-    device = torch.device(cuda_number if torch.cuda.is_available() else "cpu")
+    if not args[1]:
+        torch.device("cpu")
+    else:
+        device = torch.device(cuda_number if torch.cuda.is_available() else "cpu")
 
     # YAMLから設定ファイル読み込み
     with open('config.yaml') as file:

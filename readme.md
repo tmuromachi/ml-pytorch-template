@@ -1,7 +1,7 @@
 # PyTorch Template
 ### ゼロから始めるPyTorch DeepLearning 環境構築から実験管理まで
 
-「できる限り変わったことをしない」「環境を汚さない」「なるべく手順を減らす」「Linux上でなるべく完結する」ことを目標とした環境構築手法です。  
+「できる限り変わったことをしない」「環境を汚さない」「なるべく手順を減らす」「Linux上でなるべく完結する」ことを目標とした初学者向け環境構築手法です。  
 python仮想環境、vscodeによるWSL2上での開発、簡単な実験管理を紹介します。
 
 個人的にはWindowsではWSLg+PyCharmが最強の開発環境になるという考えでしたが、
@@ -21,7 +21,7 @@ vscodeではRemote SSHだとGit追跡が遅かったり、変更箇所がハイ�
 
 ---
 ## 特徴
-- WindowsでWSL2+VScode+pyenv+venv+RemoteWSL環境を構築します。
+- WindowsでWSL2+VScode+venv+RemoteWSL環境を構築します。
 - シェルスクリプトでGPUの選択等を対話形式で行い、プログラムを実行します。
 - 実行時の時間やコメントを反映したディレクトリを作成し、ログの保存・実験管理を行います。 
 
@@ -51,29 +51,38 @@ https://docs.microsoft.com/ja-jp/windows/wsl/tutorials/wsl-vscode
 ---
 
 ## Python環境構築 
-サーバー上のPythonはシステムが使用しているため、そのまま使わないでください。  
-仮想環境やDockerを使うべきです。仮想環境は様々なものがありますが、本稿ではpython.jpの手順と同様にpyenv+venvを使用します。  
+Linux上のPythonはシステムが使用しているため、基本的にはそのPythonを使わないでください。  
+仮想環境やDockerを使うべきです。仮想環境は様々なものがありますが、本稿ではvenvで仮想環境の作成を行います。  
+venvはPythonに標準で入っており、仮想環境はvenvが最も基本的だと考えています。   
+Pythonは3系であればバージョントラブルはあまりありません。どちらかというとバージョンを上げすぎると対応していないパッケージが出てくるので
+少し古めのほうがよいです。そういった事情も踏まえてQiita等でよく紹介されているpyenv+venv環境は基本的には不要だと考えています。  
+venvで仮想環境を作る際に違うバージョンのpythonを使えばpyenvなしでも複数バージョンのPythonを使用できます。
+
+python.jpの仮想環境構築手順を参考にしています。   
 https://www.python.jp/install/ubuntu/virtualenv.html
 
-1. pyenvによるビルド
-pyenvのpython-buildを利用してPythonソースコードのダウンロードからインストールまで行います。  
+1. **pyenvによるビルド**  
+pyenvのpython-buildを利用してPythonソースコードのダウンロードからインストールまで行います。
    ```
-   Python3.8インストール例：  
+   Python3.8インストール例：
    $ git clone git://github.com/pyenv/pyenv.git  
    $ pyenv/plugins/python-build/bin/python-build 3.8.3 ~/python3.8
    ```
+   
 
-2. pyenvでpythonバージョンを切り替える  
+2. **仮想環境の作成をする**  
+インストールしたpythonのバージョンを指定した仮想環境の作成をします。まず、このプロジェクトをクローンしたディレクトリに移動してください。  
+次に、手順1で作成したディレクトリの下にbin/python3があるため、それを指定して仮想環境を作ります。  
+以下のコマンドの場合だと、`.venv`というディレクトリに仮想環境が作られます。  
+`$ ~/python3.8/bin/python3 -m venv .venv`  
 
 
-3. 仮想環境の作成をする  
-python のバージョンを指定した仮想環境の作成をします。  
-`$ python3.7 -m venv .venv`  
-
-
-4. 仮想環境の有効化  
-`. venv/bin/activate`  
-ターミナルに(venv)という表示が出たら成功
+3. **仮想環境の有効化**  
+仮想環境の作成が完了した後に仮想環境をアクティブにします。
+`$ . .venv/bin/activate`  
+ターミナルのプロンプトの前に(.venv)という表示が出たら成功です。  
+`$ python3`と入力するとPythonのバージョンも確認できます。  
+仮想環境を終了したい場合には`$ deactivate`と入力することで終了します。
 
 ---
 
@@ -83,20 +92,31 @@ python のバージョンを指定した仮想環境の作成をします。
 コードは./src以下に格納しています。今回は実行時に実験管理まで行いたいので、シェルスクリプト経由でmain.pyを実行します。
 
 
-1. **データ準備**  
+1. **必要なパッケージのインストール**  
+サンプルを動かすために必要なパッケージ等(PyTotrch, numpy等)をインストールします。  
+必要なパッケージの一覧は`requirements.txt`に記載されており、Pythonのパッケージを管理システムであるpipにrequirements.txtを渡すことでインストールできます。  
+以下のコマンドでrequirements.txtに記載されたパッケージがインストールされます。  
+`$ pip install -r requirements.txt`
+
+2. **データ準備**  
 加工済みMNISTデータを解凍します。  
 `cd ml-pytorch` (プロジェクトのルートディレクトリに移動します)  
 `unzip data/mnist.zip -d ./data/` (解凍します)
-2. **学習の設定**  
+
+3. **学習の設定**  
 データセットのパスやエポック数やバッチサイズ等はconfig.yamlで設定してあります  
 変更したい場合はconfig.yamlを書き換えると変更ができます。
-3. **実行**  
+
+4. **実行**  
 PyTorchサンプル実行します。  
 `source run.sh`というコマンドをプロジェクトルートで実行すると、まずCUDAデバイス番号を聞いてきます。  
 `nvtop`等を使用して、空いているGPUを確認し、番号を入力しましょう。  
+機械学習用やゲーム用のGPUがない場合(ノートパソコンだとほとんどの場合ないと思います)は番号入力時にエンターを押してスキップしてください。
+スキップした場合はCPUで計算します。  
 数字を入力してエンターすると、実験時のコメントを入力できます。必要なければそのままエンターを押してください。  
 コメント入力まで終わるとサンプルが実行されます。
-4. **結果(実験管理)**  
+
+5. **結果(実験管理)**  
 実行が終了すると実行結果は./log/[実行時刻]ディレクトリ内に保存されます。
 
 ###  注意事項等
@@ -122,6 +142,9 @@ Pythonでは自作モジュールをインポートする際にはパスの設�
 
 ---
 ## 参考文献
+Python環境構築ガイド  
+https://www.python.jp/install/ubuntu/index.html
+
 MNIST-JPG  
 https://github.com/teavanist/MNIST-JPG  
 ./data/mnist.zipに使用したものです。
