@@ -2,6 +2,10 @@
 
 echo -n "Please select the CUDA device number:"
 read num
+# 変数numが空の場合の処理
+if [ -z "$num" ]; then
+  num=0
+fi
 
 echo -n "comment:"
 read comment
