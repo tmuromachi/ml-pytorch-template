@@ -1,7 +1,7 @@
 # PyTorch Template
 ### ゼロから始めるPyTorch DeepLearning 環境構築から実験管理まで
 
-「できる限り公式準拠」「環境を汚さない」「なるべく手順を減らす」「Linux上でなるべく完結する」ことを目標とした環境構築手法です。  
+「できる限り変わったことをしない」「環境を汚さない」「なるべく手順を減らす」「Linux上でなるべく完結する」ことを目標とした環境構築手法です。  
 python仮想環境、vscodeによるサーバー上での開発、簡単な実験管理を紹介します。
 
 個人的にはWindowsではWSLg+PyCharmが最強の開発環境になるという考えでしたが、
@@ -9,18 +9,19 @@ python仮想環境、vscodeによるサーバー上での開発、簡単な実�
 (PyCharmの方が仮想環境やGit関係まで面倒見は良いです。
 vscodeではRemote SSHだとGit追跡が遅かったり、変更箇所がハイライトされないなど、特にGit周りは弱く感じます。)  
 
-この手順の他の開発環境は以下のものなどがあると思います。  
+この手順の他の開発環境は以下のものなどがあると思います。 
+```
 - VNC上でPyCharmを使用し、開発を行う(PyCharmの動作が不安定だとよく言われています)
 - 手元のVM上でPyCharmを動かし、Gitでサーバーにコードを送る(自分はこれが一番好きです)
 - 手元のmac/Linux上でPyCharmを動かし、Gitでサーバーにコードを送る(これも良いです)
 - WindowsでPyCharmをうごかし、Gitでサーバーにコードを送る(WindowsでPython環境構築は辛いです)
 - WindowsのPyCharmをWSLインタプリタを使用して動かす(WSL上の仮想環境が使えません。またGit周りでも難ありです)
 - WSL2上でPyCharmを動かし、xrdpやVNCを使って画面を出す(日本語化等も含めると手順が多すぎて万人におすすめできません。)
+```
 
 ---
 ## 特徴
 - WindowsでWSL2+VScode+pyenv+venv+RemoteSSH環境を構築します。
-- RemoteSSHを使ってサーバー上で開発します。時間がかかるプログラムはVNC上で動かします。
 - シェルスクリプトでGPUの選択等を対話形式で行い、プログラムを実行します。
 - 実行時の時間やコメントを反映したディレクトリを作成し、ログの保存・実験管理を行います。 
 
@@ -38,13 +39,46 @@ http://yann.lecun.com/exdb/mnist/
 ## VSCode Remote SSH環境を作る
 記述予定。
 
+WSL2版とリモートサーバー版を作成。
+鍵をどうするか？
+
+1. VS Code に Remote SSH の拡張機能をインストール
+2. 鍵を流用
+3. vscodeでssh接続する  
+vscodeの左下の緑色の「><」をクリック
+Connect to Host.をクリック
+SSH接続情報に記載したHost名をクリック
+新しくVSCodeのウィンドウが立ち上がる。
+左下に接続先ホスト名が表示される。
+リモート先のvscodeで使う拡張機能をインストールする。
+
+---
 
 ## Python環境構築 
 サーバー上のPythonはシステムが使用しているため、そのまま使わないでください。  
-仮想環境やDockerを使うべきです。仮想環境は様々なものがありますが、本稿では公式手順と同様にpyenv+venvを使用します。  
+仮想環境やDockerを使うべきです。仮想環境は様々なものがありますが、本稿ではpython.jpの手順と同様にpyenv+venvを使用します。  
 https://www.python.jp/install/ubuntu/virtualenv.html
 
-記述予定。 
+1. pyenvによるビルド
+pyenvのpython-buildを利用してPythonソースコードのダウンロードからインストールまで行います。  
+   ```
+   Python3.8インストール例：  
+   $ git clone git://github.com/pyenv/pyenv.git  
+   $ pyenv/plugins/python-build/bin/python-build 3.8.3 ~/python3.8
+   ```
+
+2. pyenvでpythonバージョンを切り替える  
+
+
+3. 仮想環境の作成をする  
+python のバージョンを指定した仮想環境の作成をします。  
+`$ python3.7 -m venv .venv`  
+
+4. 仮想環境の有効化  
+`. venv/bin/activate`  
+ターミナルに(venv)という表示が出たら成功
+
+---
 
 ## PyTorchサンプルを動かす
 今回動かすサンプルは単純な3層CNNを使用したものです。モデル部分は参考資料のものをほぼそのまま流用したため、誤りがある可能性があります。
