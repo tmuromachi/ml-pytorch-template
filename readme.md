@@ -58,6 +58,7 @@ https://docs.microsoft.com/ja-jp/windows/wsl/tutorials/wsl-vscode
 # 新しくディレクトリを作る場合
 $ cd
 $ mkdir vscode 
+
 # gitからプロジェクトをcloneする
 $ git clone git@github.com:tmuromachi/ml-pytorch-template.git
 ```
@@ -66,7 +67,7 @@ $ git clone git@github.com:tmuromachi/ml-pytorch-template.git
 ---
 
 ## Python環境構築 
-Linux上のPythonはシステムが使用しているため、基本的にはそのPythonを使わないでください。  
+Linux上のPythonはシステムが使用しているため、基本的にはそのPythonを使いません。 
 仮想環境やDockerを使うべきです。仮想環境は様々なものがありますが、本稿ではvenvで仮想環境の作成を行います。  
 venvはPythonに標準で入っており、仮想環境はvenvが最も基本的だと考えています。   
 Pythonは3系であればバージョントラブルはあまりありません。どちらかというとバージョンを上げすぎると対応していないパッケージが出てくるので
