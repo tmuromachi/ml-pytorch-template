@@ -2,3 +2,5 @@
 model
 data/*
 !data/mnist.zip
+log/
+!log/.gitkeep
