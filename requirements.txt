@@ -8,4 +8,6 @@ sklearn
 pyyaml
 scikit-learn
 Pillow
+
+flake8
 # tensorboard

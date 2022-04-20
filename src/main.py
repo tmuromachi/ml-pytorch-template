@@ -4,17 +4,16 @@ import torch.optim as optim
 
 import sys
 import yaml
-# from tqdm.notebook import tqdm  # jupyter で実行するとき
-
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
-sys.path.append('src')    # 自作モジュール探索用パス
 import models
 import dataset
 from evaluate import evaluate
 from util.plot import plot
 from util.util import fix_seed
 from train import train_model
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+# from tqdm.notebook import tqdm  # jupyter で実行するとき
+# sys.path.append('src')    # 自作モジュール探索用パス
 
 if __name__ == '__main__':
     # リソースの選択（CPU/GPU）

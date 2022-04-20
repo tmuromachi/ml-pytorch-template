@@ -4,6 +4,10 @@
 Qiita版が最新です。
 https://qiita.com/ToshikiMuromachi/items/ec1233e50b8069a22e19
 
+初めてPythonを触る人のためのコード：`./template/main.py`  
+実際に使用することを想定しモジュール化されたコード：`./src/`  
+
+---
 「できる限り変わったことをしない」「環境を汚さない」「なるべく手順を減らす」「Linux上でなるべく完結する」ことを目標とした初学者向け環境構築手法です。  
 python仮想環境、vscodeによるWSL2上での開発、簡単な実験管理を紹介します。
 
