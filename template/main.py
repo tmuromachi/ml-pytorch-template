@@ -1,17 +1,16 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.nn.functional as F
+# import torch.nn.functional as F
 import torchvision.transforms as transforms
 
-import sys
+# import sys
 import random
 import numpy as np
 import matplotlib.pyplot as plt
 import pathlib
-import yaml
 from PIL import Image
-from tqdm import tqdm  # コマンドラインで実行するとき
+# from tqdm import tqdm  # コマンドラインで実行するとき
 # from tqdm.notebook import tqdm  # jupyter で実行するとき
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
