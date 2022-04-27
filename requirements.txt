@@ -10,4 +10,5 @@ scikit-learn
 Pillow
 
 flake8
+autopep8
 # tensorboard
