@@ -67,7 +67,7 @@ $ cd
 $ mkdir vscode 
 
 # gitからプロジェクトをcloneする
-$ git clone git@github.com:tmuromachi/ml-pytorch-template.git
+$ git clone https://gitlab.com/tmuromachi/ml-pytorch-template.git
 ```
 
 
