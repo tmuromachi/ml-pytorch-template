@@ -55,7 +55,7 @@ if __name__ == '__main__':
         model, train_l, test_l = train_model(model, train_loader, test_loader, optimizer, criterion, device)
         train_loss.append(train_l)
         test_loss.append(test_l)
-        print("epoch:", epoch, "/", EPOCH)
+        print("epoch:", epoch + 1, "/", EPOCH)
         print("train loss:", train_l)
         print("test loss:", test_l)
 

@@ -195,7 +195,7 @@ for epoch in range(EPOCH):
     model, train_l, test_l = train_model(model, train_loader, test_loader)
     train_loss.append(train_l)
     test_loss.append(test_l)
-    print("epoch:", epoch, "/", EPOCH)
+    print("epoch:", epoch + 1, "/", EPOCH)
     print("train loss:", train_l)
     print("test loss:", test_l)
 
