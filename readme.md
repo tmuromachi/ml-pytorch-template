@@ -1,7 +1,7 @@
 # PyTorch Template
 ### ゼロから始めるPyTorch DeepLearning 環境構築から実験管理まで
 
-Qiita版が最新です。
+Qiita版の解説が最新です。このReadmeの内容は古くなっている可能性があります。
 https://qiita.com/ToshikiMuromachi/items/ec1233e50b8069a22e19
 
 初めてPythonを触る人のためのコード：`./template/main.py`  
