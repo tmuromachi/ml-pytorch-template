@@ -14,7 +14,8 @@ https://qiita.com/ToshikiMuromachi/items/ec1233e50b8069a22e19
 2. **PyTorchサンプルの実行**  
 **・シェルスクリプトから実行する場合**   
 `source run.sh`を実行することで対話形式で学習を開始できます  
-(CUDAデバイス選択時に0番を選択するとCPUで実行されます)    
+※ CUDAデバイス選択時に0番を選択するとCPUで実行されます  
 **・直接pythonスクリプトを実行する場合**  
 `python ./src/main.py 1`  
-(pythonスクリプトの引数はGPU番号です(0はCPU))
+※ pythonスクリプトの引数はGPU番号です(0はCPU)  
+※ 学習後のモデルとloss画像がml-pytorch-template直下に生成されます
