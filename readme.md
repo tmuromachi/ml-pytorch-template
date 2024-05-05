@@ -8,13 +8,15 @@ https://qiita.com/ToshikiMuromachi/items/ec1233e50b8069a22e19
 実際に使用することを想定しモジュール化されたコード：`./src/`  
 
 ### 実行方法
-1. **MNISTデータの解凍**  
+#### 1. MNISTデータの解凍
 `unzip data/mnist.zip -d ./data/`
 
-2. **PyTorchサンプルの実行**  
-**・シェルスクリプトから実行する場合**   
+#### 2. PyTorchサンプルの実行
+
+**・シェルスクリプトから実行する場合**  
 `source run.sh`を実行することで対話形式で学習を開始できます  
 ※ CUDAデバイス選択時に0番を選択するとCPUで実行されます  
+
 **・直接pythonスクリプトを実行する場合**  
 `python ./src/main.py 1`  
 ※ pythonスクリプトの引数はGPU番号です(0はCPU)  
