@@ -4,7 +4,6 @@ numpy
 matplotlib
 tqdm
 torchsummary
-sklearn
 pyyaml
 scikit-learn
 Pillow

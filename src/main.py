@@ -1,21 +1,25 @@
+import sys
+import os
+import yaml
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
-import sys
-import yaml
 import models
 import dataset
 from evaluate import evaluate
 from util.plot import plot
 from util.util import fix_seed
 from train import train_model
-
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 # from tqdm.notebook import tqdm  # jupyter で実行するとき
-# sys.path.append('src')    # 自作モジュール探索用パス
 
 if __name__ == '__main__':
+    # カレントディレクトリを実行ファイルの1つ上の階層ディレクトリに変更
+    script_path = os.path.abspath(sys.argv[0])
+    parent_dir = os.path.dirname(script_path)
+    grandparent_dir = os.path.dirname(parent_dir)
+    os.chdir(grandparent_dir)
+
     # リソースの選択（CPU/GPU）
     args = sys.argv
     cuda_number = "cuda:" + args[1]
